@@ -123,7 +123,6 @@ color_dict = {
     "darkseagreen": "#8FBC8F",
     "darkslateblue": "#483D8B",
     "darkslategray": "#2F4F4F",
-    "darkslategrey": "#2F4F4F",
     "darkturquoise": "#00CED1",
     "darkviolet": "#9400D3",
     "deeppink": "#FF1493",
@@ -219,7 +218,6 @@ color_dict = {
     "skyblue": "#87CEEB",
     "slateblue": "#6A5ACD",
     "slategray": "#708090",
-    "slategrey": "#708090",
     "snow": "#FFFAFA",
     "springgreen": "#00FF7F",
     "steelblue": "#4682B4",
@@ -237,16 +235,22 @@ color_dict = {
 }
 
 # User input for hex color
-user_input = input("Enter a hex color code (e.g., #FFFFFF): ")
+while True:
+  user_input = input("Enter a hex color code (e.g., #FFFFFF) or 'q' to quit: ")
 
-# Check if the input is a valid hex color code
-if is_valid_hex_color(user_input):
-    nearest_color_hex = find_nearest_color(user_input, color_dict.values())
-    # Find the corresponding color name for the nearest color hex
-    nearest_color_name = [name for name, hex_code in color_dict.items() if hex_code.lower() == nearest_color_hex.lower()]
-    if nearest_color_name:
-        print(f"The nearest color to {user_input} is {nearest_color_hex} ({nearest_color_name[0]}).")
+  # Check if the input is a valid hex color code
+  if is_valid_hex_color(user_input):
+      nearest_color_hex = find_nearest_color(user_input, color_dict.values())
+      # Find the corresponding color name for the nearest color hex
+      nearest_color_name = [name for name, hex_code in color_dict.items() if hex_code.lower() == nearest_color_hex.lower()]
+      if nearest_color_name:
+          print(f"The nearest color to {user_input} is {nearest_color_hex} ({nearest_color_name[0]}).")
+      else:
+          print(f"The nearest color to {user_input} is {nearest_color_hex}.")
+      break
+  else:
+    if user_input.lower() == "q":
+      break
     else:
-        print(f"The nearest color to {user_input} is {nearest_color_hex}.")
-else:
-    print("Invalid hex color code. Please enter a valid hex color (e.g., #FFFFFF).")
+      print("Invalid hex color code. Please enter a valid hex color (e.g., #FFFFFF).")
+      print()
