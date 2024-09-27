@@ -1,6 +1,6 @@
-# Nearest Color Finder for Textual
+# Nearest color finder for Textual
 
-This Python script allows users to input a hex color code and find the top 3 nearest colors from the list of named colors for textual [link text](https://textual.textualize.io/api/color/#textual.color--named-colors). The nearest colors are calculated using the Euclidean distance in the RGB color space.
+This Python script allows users to input a hex color code and find the top 3 nearest colors from the list of named colors for [textual](https://textual.textualize.io/api/color/#textual.color--named-colors). The nearest colors are calculated using the Euclidean distance in the RGB color space.
 
 ## Features
 
@@ -54,4 +54,4 @@ The nearest colors to #FF6347 are:
 
 ## Functions
 
-This project is open-source and available under GNU General Public License version 3
+This project is open-source and available under GNU General Public License version 3.
