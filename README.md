@@ -28,16 +28,13 @@ This Python script helps you find the nearest color from a predefined list of he
                   print(f"The nearest color to {hex_color} is {nearest_color}")
                      ```
                      
-                     3. A list of hex color codes is provided within the script, but you can modify it if needed.
+3. A list of hex color codes is provided within the script, but you can modify it if needed.
                      
-                     ## Example Output
+## Example Output
                      
-                     For an input color of `#f2e3bc`, the script returns the nearest color from the list as `#f5deb3`.
+For an input color of `#f2e3bc`, the script returns the nearest color from the list as `#f5deb3`.
                      
-                     ## Dependencies
+## Dependencies
                      
-                     This script requires Python 3.x and the `math` module (which is part of the Python standard library).
-                     
-                     ---
-                     
-                     This text gives users an overview of what the script does, how it works, and how to use it. You can adjust it further based on your needs or additional features.
+This script requires Python 3.x and the `math` module (which is part of the Python standard library).
+
