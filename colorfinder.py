@@ -23,52 +23,52 @@
 import math
 import re
 
-def find_nearest_color(hex_color, color_list):
-  """Finds the nearest color in the given list to the specified hex color.
+def find_nearest_colors(hex_color, color_list, top_n=3):
+    """Finds the top N nearest colors in the given list to the specified hex color.
 
-  Args:
-    hex_color: The hex color to find the nearest match for.
-    color_list: A list of hex colors to search through.
+    Args:
+        hex_color: The hex color to find the nearest matches for.
+        color_list: A list of hex colors to search through.
+        top_n: The number of nearest colors to return (default is 3).
 
-  Returns:
-    The nearest hex color in the list to the specified hex color.
-  """
+    Returns:
+        A list of tuples containing the nearest hex colors and their distances.
+    """
+    # Convert the hex color to RGB values
+    r, g, b = hex_to_rgb(hex_color)
 
-  # Convert the hex color to RGB values
-  r, g, b = hex_to_rgb(hex_color)
+    # Create a list to store colors and their distances
+    distances = []
 
-  # Find the nearest color in the list
-  nearest_color = None
-  nearest_distance = float('inf')
-  for color in color_list:
-    cr, cg, cb = hex_to_rgb(color)
-    distance = math.sqrt((r - cr)**2 + (g - cg)**2 + (b - cb)**2)
-    if distance < nearest_distance:
-      nearest_color = color
-      nearest_distance = distance
+    # Calculate the distance for each color in the list
+    for color in color_list:
+        cr, cg, cb = hex_to_rgb(color)
+        distance = math.sqrt((r - cr)**2 + (g - cg)**2 + (b - cb)**2)
+        distances.append((color, distance))
 
-  return nearest_color
+    # Sort by distance and return the top N results
+    distances.sort(key=lambda x: x[1])
+    return distances[:top_n]
 
 def hex_to_rgb(hex_color):
-  """Converts a hex color to RGB values.
+    """Converts a hex color to RGB values.
 
-  Args:
-    hex_color: The hex color to convert.
+    Args:
+        hex_color: The hex color to convert.
 
-  Returns:
-    A tuple of RGB values.
-  """
-
-  hex_color = hex_color.lstrip('#')
-  if len(hex_color) == 3:
-    hex_color = hex_color * 2
-  return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    Returns:
+        A tuple of RGB values.
+    """
+    hex_color = hex_color.lstrip('#')
+    if len(hex_color) == 3:
+        hex_color = hex_color * 2
+    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
 def is_valid_hex_color(hex_color):
     """Checks if the input is a valid hex color code."""
     return bool(re.match(r'^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$', hex_color))
 
-# Dictionary of hex color codes and corresponding names known to textual python tui framework 
+# Dictionary of hex color codes and corresponding names
 color_dict = {
     "aliceblue": "#F0F8FF",
     "ansi_black": "#000000",
@@ -158,7 +158,6 @@ color_dict = {
     "lightgoldenrodyellow": "#FAFAD2",
     "lightgray": "#D3D3D3",
     "lightgreen": "#90EE90",
-    "lightgrey": "#D3D3D3",
     "lightpink": "#FFB6C1",
     "lightsalmon": "#FFA07A",
     "lightseagreen": "#20B2AA",
@@ -171,7 +170,6 @@ color_dict = {
     "limegreen": "#32CD32",
     "linen": "#FAF0E6",
     "magenta": "#FF00FF",
-    "maroon": "#800000",
     "mediumaquamarine": "#66CDAA",
     "mediumblue": "#0000CD",
     "mediumorchid": "#BA55D3",
@@ -236,21 +234,23 @@ color_dict = {
 
 # User input for hex color
 while True:
-  user_input = input("Enter a hex color code (e.g., #FFFFFF) or 'q' to quit: ")
+    user_input = input("Enter a hex color code (e.g., #FFFFFF) or 'q' to quit: ")
 
-  # Check if the input is a valid hex color code
-  if is_valid_hex_color(user_input):
-      nearest_color_hex = find_nearest_color(user_input, color_dict.values())
-      # Find the corresponding color name for the nearest color hex
-      nearest_color_name = [name for name, hex_code in color_dict.items() if hex_code.lower() == nearest_color_hex.lower()]
-      if nearest_color_name:
-          print(f"The nearest color to {user_input} is {nearest_color_hex} ({nearest_color_name[0]}).")
-      else:
-          print(f"The nearest color to {user_input} is {nearest_color_hex}.")
-      break
-  else:
-    if user_input.lower() == "q":
-      break
+    # Check if the input is a valid hex color code
+    if is_valid_hex_color(user_input):
+        # Find the top 3 nearest colors
+        nearest_colors = find_nearest_colors(user_input, color_dict.values(), top_n=3)
+
+        # Display the results
+        print(f"The nearest colors to {user_input} are:")
+        for i, (nearest_color_hex, distance) in enumerate(nearest_colors):
+            nearest_color_name = [name for name, hex_code in color_dict.items() if hex_code.lower() == nearest_color_hex.lower()]
+            nearest_color_name = nearest_color_name[0] if nearest_color_name else "Unknown"
+            print(f"{i + 1}. {nearest_color_hex} ({nearest_color_name}), Distance: {distance:.2f}")
+        break
     else:
-      print("Invalid hex color code. Please enter a valid hex color (e.g., #FFFFFF).")
-      print()
+        if user_input.lower() == "q":
+            break
+        else:
+            print("Invalid hex color code. Please enter a valid hex color (e.g., #FFFFFF).")
+            print()
