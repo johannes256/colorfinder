@@ -1,6 +1,6 @@
 #!/home/johannes/.local/venv/bin/python
 # /***************************************************************************
-#  *   colorfinder.py                                                              *
+#  *   colorfinder.py                                                        *
 #  *                                                                         *
 #  *   Copyright (C) 2023-2024 by Jan Dolstra                                *
 #  *   jan@jandnet.nl                                                        *
@@ -21,6 +21,7 @@
 #  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 #  ***************************************************************************/
 import math
+import re
 
 def find_nearest_color(hex_color, color_list):
   """Finds the nearest color in the given list to the specified hex color.
@@ -63,7 +64,11 @@ def hex_to_rgb(hex_color):
     hex_color = hex_color * 2
   return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-# Example usage
+def is_valid_hex_color(hex_color):
+    """Checks if the input is a valid hex color code."""
+    return bool(re.match(r'^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$', hex_color))
+
+# List of hex color codes known to textual python tui framework 
 color_list = hex_codes = [    
     "#f0f8ff", "#000000", "#000080", "#808080", "#0000ff", "#00ffff", "#00ff00", "#ff00ff", 
     "#ff0000", "#ffffff", "#ffff00", "#008080", "#008000", "#800080", "#800000", "#c0c0c0", 
@@ -87,6 +92,13 @@ color_list = hex_codes = [
     "#4682b4", "#d2b48c", "#008080", "#d8bfd8", "#ff6347", "#40e0d0", "#ee82ee", "#f5deb3",
     "#ffffff", "#f5f5f5", "#ffff00", "#9acd32"
 ]
-hex_color = "#8ECAE6"
-nearest_color = find_nearest_color(hex_color, color_list)
-print(nearest_color)
+
+# User input for hex color
+user_input = input("Enter a hex color code (e.g., #FFFFFF): ")
+
+# Validate the input
+if is_valid_hex_color(user_input):
+    nearest_color = find_nearest_color(user_input, color_list)
+    print(f"The nearest color to {user_input} is {nearest_color}.")
+else:
+    print("Invalid hex color code. Please enter a valid hex color (e.g., #FFFFFF).")
