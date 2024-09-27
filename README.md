@@ -20,13 +20,13 @@ This Python script helps you find the nearest color from a predefined list of he
 1. Clone the repository and navigate to the project directory.
 2. The main function to use is `find_nearest_color(hex_color, color_list)`.
    
-      Example:
+Example:
       
-         ```python
-            hex_color = "#f2e3bc"  # Input hex color
-               nearest_color = find_nearest_color(hex_color, color_list)
-                  print(f"The nearest color to {hex_color} is {nearest_color}")
-                     ```
+```python
+hex_color = "#f2e3bc"  # Input hex color
+nearest_color = find_nearest_color(hex_color, color_list)
+print(f"The nearest color to {hex_color} is {nearest_color}")
+```
                      
 3. A list of hex color codes is provided within the script, but you can modify it if needed.
                      
