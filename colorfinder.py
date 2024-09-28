@@ -1,9 +1,8 @@
-#!/home/johannes/.local/venv/bin/python
 # /***************************************************************************
 #  *   colorfinder.py                                                        *
 #  *                                                                         *
 #  *   Copyright (C) 2023-2024 by Jan Dolstra                                *
-#  *   jan@jandnet.nl                                                        *
+#  *   dev@jandnet.nl                                                        *
 #  *                                                                         *
 #  *   This program is free software; you can redistribute it and/or modify  *
 #  *   it under the terms of the GNU General Public License as published by  *

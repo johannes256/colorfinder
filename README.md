@@ -6,10 +6,10 @@ This Python script allows users to input a hex color code and find the top 3 nea
 
 - **Hex Color Validation**: Ensures that user inputs are valid hex color codes.
 - **Nearest Color Matching**: Finds and displays the top 3 closest color matches from a predefined dictionary of colors.
-- **Predefined Color Dictionary**: Includes a dictionary of named hex colors based on common color names.
+- **Predefined Color Dictionary**: Includes a dictionary of named hex colors defined in Textual.
 - **Distance Calculation**: Uses Euclidean distance to measure the difference between RGB values.
 
-## How It Works
+## How it works
 
 1. The user is prompted to input a valid hex color code (e.g., `#FF6347`).
 2. The script calculates the Euclidean distance between the input color and each color in the predefined dictionary.
@@ -28,7 +28,7 @@ This Python script allows users to input a hex color code and find the top 3 nea
 4. Enter a hex color code when prompted (e.g., `#FFFFFF` for white).
 5. The script will display the top 3 closest colors to the input.
 
-## Example Input and Output
+## Example input and output
 
 ```bash
 Enter a hex color code (e.g., #FFFFFF) or 'q' to quit: #FF6347
@@ -52,6 +52,6 @@ The nearest colors to #FF6347 are:
 - `hex_to_rgb(hex_color)`: Converts a hex color to RGB values.
 - `is_valid_hex_color(hex_color)`: Validates whether the input is a valid hex color code.
 
-## Functions
+## License
 
 This project is open-source and available under GNU General Public License version 3.
